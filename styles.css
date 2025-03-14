@@ -10,5 +10,7 @@
     border:1px solid black;
 }
 .mole{
-    background-color: darkblue;
+    background-image:url(mole.jpg);
+    background-repeat: no-repeat;
+    background-color:ghostwhite;
 }

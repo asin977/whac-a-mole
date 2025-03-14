@@ -4,6 +4,9 @@ const score = document.querySelector('#score');
 
 let result = 0;
 let hitPosition = null;
+let currentTime = 60;
+let timerId = null;
+
 
 function randomSquare() {
     squares.forEach(square => {
@@ -14,23 +17,39 @@ function randomSquare() {
     randomSquare.classList.add('mole');
 
     hitPosition = randomSquare.id;
+    console.log("Mole is at: ", hitPosition);
 }
 
 squares.forEach(square => {
-    square.addEventListener('mousedown', () => {  
+    square.addEventListener('click', () => {  
+        console.log("Clicked square: ", square.id); 
+
         if (square.id === hitPosition) {  
             result++;
             score.textContent = result;
-            hitPosition = null;
+            hitPosition = null;  
+            console.log("Score updated: ", result); 
         }
     });
 });
 
+
 function moveMole() {
-       let timerId = null;
-       timerId = setInterval(randomSquare,500);
+    timerId = setInterval(randomSquare, 800); 
 }
 
 
-moveMole()
-randomSquare()
+function countDown() {
+    currentTime--;
+    timeLeft.textContent = currentTime;
+
+    if (currentTime === 0) {
+        clearInterval(countDownTimerId);
+        clearInterval(timerId);
+        alert("Game Over! Your final score is " + result);
+    }
+}
+
+
+moveMole();
+let countDownTimerId = setInterval(countDown, 1000); 
